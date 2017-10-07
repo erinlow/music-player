@@ -19,10 +19,25 @@ public class Album {
 		return songList;
 	}
 	
-//	public boolean addSong(Song song) {
-//		if(findSong(song.getTitle())) {
-//			System.o
-//		}
-//	}
+	public boolean addSong(Song song) {
+		if(findSong(song.getTitle()) != null) {
+			System.out.println("Song is already in the album.");
+			return false;
+		}
+		else {
+			System.out.println("Song was successfully added");
+			songList.add(song);
+			return true;
+		}
+	}
+	
+	private Song findSong(String title) {
+		for(Song checkSong : this.songList) {
+			if(title.equals(checkSong.getTitle())) {
+				return checkSong;
+			}
+		}
+		return null;
+	}
 	
 }
