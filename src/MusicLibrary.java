@@ -12,6 +12,15 @@ public class MusicLibrary {
 	public ArrayList<Song> getSongList() {
 		return songList;
 	}
+	
+	public Song queryLibrary(String name) {
+		for(Song song : songList) {
+			if(song.getTitle().equals(name)) {
+				return song;
+			}
+		}
+		return null;
+	}
 
 
 	public void importFiles() {

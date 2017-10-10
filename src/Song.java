@@ -24,10 +24,6 @@ public class Song {
 		return album;
 	}
 
-	private Song createNewSong(String title, String artist, String album) {
-		return new Song(title, artist, album);
-	}
-
 	@Override
 	public String toString() {
 		return "'"+ this.title + "'";
