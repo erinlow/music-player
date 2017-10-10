@@ -22,7 +22,7 @@ public class Main {
 				addPlaylist();
 				break;
 			case 2:
-				displayPlaylist();
+				displayPlaylists();
 				break;
 			case 3:
 				addSong();
@@ -52,16 +52,15 @@ public class Main {
 				System.out.println("That song does not exist");
 			}
 			else {
-				System.out.println("Song exists");
 				System.out.print("Which playlist would you like to add "+name+
 				" to? ");
+				// TODO Check to see if song already exists in the playlist
 				String playlistName = keyboard.nextLine();
 				Playlist checkPlaylist = queryPlaylist(playlistName);
 				if(checkPlaylist == null) {
 					System.out.println("Playlist does not exist");
 				}
 				else {
-					System.out.println("Playlist exists");
 					checkPlaylist.addSongToPlaylist(checkSong);
 				}
 			}	
@@ -81,15 +80,14 @@ public class Main {
 			System.out.println("Playlist does not exist");
 		}
 		else {
-			System.out.println("Playlist exists");
-			//System.out.println(checkPlaylist.getSongs());
+			checkPlaylist.play();
 		}
 		return name;
 		
 	}
 	
 	// Method to display all the Playlist objects in the ArrayList<Playlist>
-	private static void displayPlaylist() {
+	private static void displayPlaylists() {
 		if(playlists.isEmpty()) {
 			System.out.println("You have no playlists.");
 		}
