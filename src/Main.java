@@ -28,8 +28,7 @@ public class Main {
 				addSong();
 				break;
 			case 4:
-				String name = playPlaylist();
-				
+				playPlaylist();
 				break;
 			case 5:
 				quit = true;
@@ -68,10 +67,9 @@ public class Main {
 	}
 
 	// TODO playPlaylist method
-	private static String playPlaylist() {
+	private static void playPlaylist() {
 		if(playlists.isEmpty()) {
 			System.out.println("You have no playlists to play");
-			return null;
 		}
 		System.out.print("Which playlist would you like to play? ");
 		String name = keyboard.nextLine();
@@ -82,8 +80,6 @@ public class Main {
 		else {
 			checkPlaylist.play();
 		}
-		return name;
-		
 	}
 	
 	// Method to display all the Playlist objects in the ArrayList<Playlist>

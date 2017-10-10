@@ -28,6 +28,9 @@ public class Playlist {
 		songs.add(song);
 	}
 	
+	// Main purpose of this java project
+	// Method to play a playlist - along with other options such as skip, go back,
+	// replay, remove current song from playlist, etc.
 	public void play() {
 		Scanner keyboard = new Scanner(System.in);
 		ListIterator<Song> songIterator = songs.listIterator();
@@ -83,16 +86,49 @@ public class Playlist {
 			case 3: // Replay current song
 				forward = replaySong(forward, songIterator);
 				break;
-			case 4: // Display songs in the playlist
+			case 4: // Remove current song from playlist
+				removeCurrentSong(forward, songIterator);
+				break;
+			case 5: // Display songs in the playlist
 				printSongs();
 				break;
-			case 5: // Display available options
+			case 6: // Display available options
 				printMenu();
 				break;
 			}
 		}
 	}
 	
+	// Method to remove current song from the playlist and automatically plays the next song
+	// If at the end of the playlist - automatically plays the previous song
+	private void removeCurrentSong(boolean forward, ListIterator<Song> songIterator) {
+		if(songs.size() > 0) {
+			if(forward) {
+				if(songIterator.hasPrevious()) {
+					System.out.println("Removing: " + songIterator.previous());
+				}
+			}
+			else {
+				if(songIterator.hasNext()) {
+					System.out.println("Removing: " + songIterator.next());
+				}
+			}
+			songIterator.remove();
+			if(songs.size() == 0) {
+				System.out.println("There are no more songs in this playlist");
+			}
+			else {
+				if(songIterator.hasNext()) {
+					System.out.println("Now playing: " + songIterator.next());
+				}
+				else if(songIterator.hasPrevious()) {
+					System.out.println("Now playing: " + songIterator.previous());
+				}	
+			}
+		}
+	}
+	
+	// Method to replay the current song in the playlist
 	private boolean replaySong(boolean forward, ListIterator<Song> songIterator) {
 		if(forward) {
 			if(songIterator.hasPrevious()) {
@@ -114,6 +150,8 @@ public class Playlist {
 		}
 		return forward;
 	}
+	
+	// Method to iterator through the list of songs in the playlist
  	private void printSongs() {
 		Iterator<Song> songIterator = songs.iterator();
 		System.out.println("===============================");
@@ -122,13 +160,16 @@ public class Playlist {
 		}
 		System.out.println("===============================");
 	}
+ 	
+ 	// Method to print out available options
  	private void printMenu() {
 		System.out.println("\nPress:\n"+
 				"0 - Exit playlist\n"+
 				"1 - Skip\n"+
 				"2 - Backward\n"+
 				"3 - Replay current song\n" +
-				"4 - Display list of available songs\n" +
-				"5 - Print menu");
+				"4 - Remove current song from playlist\n" +
+				"5 - Display list of available songs\n" +
+				"6 - Print menu");
 	}
 }
